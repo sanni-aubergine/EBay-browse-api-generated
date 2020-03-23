@@ -1,20 +1,48 @@
-        import 'package:built_value/built_value.dart';
-import 'package:built_value/serializer.dart';
+part of ebay_buy_browse.api;
 
-part 'remove_cart_item_input.g.dart';
+class RemoveCartItemInput {
+  /* The identifier of the item in the cart to be removed. This ID is generated when the item was added to the cart. */
+  String cartItemId = null;
+  RemoveCartItemInput();
 
-abstract class RemoveCartItemInput implements Built<RemoveCartItemInput, RemoveCartItemInputBuilder> {
+  @override
+  String toString() {
+    return 'RemoveCartItemInput[cartItemId=$cartItemId, ]';
+  }
 
-    /* The identifier of the item in the cart to be removed. This ID is generated when the item was added to the cart. */
-        @nullable
-    @BuiltValueField(wireName: r'cartItemId')
-    String get cartItemId;
+  RemoveCartItemInput.fromJson(Map<String, dynamic> json) {
+    if (json == null) return;
+    cartItemId = json['cartItemId'];
+  }
 
-    // Boilerplate code needed to wire-up generated code
-    RemoveCartItemInput._();
+  Map<String, dynamic> toJson() {
+    Map <String, dynamic> json = {};
+    if (cartItemId != null)
+      json['cartItemId'] = cartItemId;
+    return json;
+  }
 
-    factory RemoveCartItemInput([updates(RemoveCartItemInputBuilder b)]) = _$RemoveCartItemInput;
-    static Serializer<RemoveCartItemInput> get serializer => _$removeCartItemInputSerializer;
+  static List<RemoveCartItemInput> listFromJson(List<dynamic> json) {
+    return json == null ? List<RemoveCartItemInput>() : json.map((value) => RemoveCartItemInput.fromJson(value)).toList();
+  }
 
+  static Map<String, RemoveCartItemInput> mapFromJson(Map<String, dynamic> json) {
+    var map = Map<String, RemoveCartItemInput>();
+    if (json != null && json.isNotEmpty) {
+      json.forEach((String key, dynamic value) => map[key] = RemoveCartItemInput.fromJson(value));
+    }
+    return map;
+  }
+
+  // maps a json object with a list of RemoveCartItemInput-objects as value to a dart map
+  static Map<String, List<RemoveCartItemInput>> mapListFromJson(Map<String, dynamic> json) {
+    var map = Map<String, List<RemoveCartItemInput>>();
+     if (json != null && json.isNotEmpty) {
+       json.forEach((String key, dynamic value) {
+         map[key] = RemoveCartItemInput.listFromJson(value);
+       });
+     }
+     return map;
+  }
 }
 

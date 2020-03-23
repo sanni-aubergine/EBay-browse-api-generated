@@ -8,7 +8,7 @@ import 'package:ebay_buy_browse/api.dart';
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**itemGroupAdditionalImages** | [**BuiltList&lt;Image&gt;**](Image.md) | An array of containers with the URLs for images that are in addition to the primary image of the item group. The primary image is returned in the itemGroupImage field. | [optional] [default to const []]
+**itemGroupAdditionalImages** | [**List&lt;Image&gt;**](Image.md) | An array of containers with the URLs for images that are in addition to the primary image of the item group. The primary image is returned in the itemGroupImage field. | [optional] [default to []]
 **itemGroupHref** | **String** | The HATEOAS reference of the parent page of the item group. An item group is an item that has various aspect differences, such as color, size, storage capacity, etc. | [optional] [default to null]
 **itemGroupId** | **String** | The unique identifier for the item group. An item group is an item that has various aspect differences, such as color, size, storage capacity, etc. | [optional] [default to null]
 **itemGroupImage** | [**Image**](Image.md) |  | [optional] [default to null]

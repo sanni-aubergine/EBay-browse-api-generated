@@ -1,20 +1,48 @@
-        import 'package:built_value/built_value.dart';
-import 'package:built_value/serializer.dart';
+part of ebay_buy_browse.api;
 
-part 'category.g.dart';
+class Category {
+  /* The unique identifier of the primary item category of the item, as well as the secondary item category if item was listed in two categories. */
+  String categoryId = null;
+  Category();
 
-abstract class Category implements Built<Category, CategoryBuilder> {
+  @override
+  String toString() {
+    return 'Category[categoryId=$categoryId, ]';
+  }
 
-    /* The unique identifier of the primary item category of the item, as well as the secondary item category if item was listed in two categories. */
-        @nullable
-    @BuiltValueField(wireName: r'categoryId')
-    String get categoryId;
+  Category.fromJson(Map<String, dynamic> json) {
+    if (json == null) return;
+    categoryId = json['categoryId'];
+  }
 
-    // Boilerplate code needed to wire-up generated code
-    Category._();
+  Map<String, dynamic> toJson() {
+    Map <String, dynamic> json = {};
+    if (categoryId != null)
+      json['categoryId'] = categoryId;
+    return json;
+  }
 
-    factory Category([updates(CategoryBuilder b)]) = _$Category;
-    static Serializer<Category> get serializer => _$categorySerializer;
+  static List<Category> listFromJson(List<dynamic> json) {
+    return json == null ? List<Category>() : json.map((value) => Category.fromJson(value)).toList();
+  }
 
+  static Map<String, Category> mapFromJson(Map<String, dynamic> json) {
+    var map = Map<String, Category>();
+    if (json != null && json.isNotEmpty) {
+      json.forEach((String key, dynamic value) => map[key] = Category.fromJson(value));
+    }
+    return map;
+  }
+
+  // maps a json object with a list of Category-objects as value to a dart map
+  static Map<String, List<Category>> mapListFromJson(Map<String, dynamic> json) {
+    var map = Map<String, List<Category>>();
+     if (json != null && json.isNotEmpty) {
+       json.forEach((String key, dynamic value) {
+         map[key] = Category.listFromJson(value);
+       });
+     }
+     return map;
+  }
 }
 

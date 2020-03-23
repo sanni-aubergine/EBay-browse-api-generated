@@ -9,14 +9,14 @@ All URIs are relative to *https://api.ebay.com/buy/browse/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**addItem**](ShoppingCartApi.md#addItem) | **post** /shopping_cart/add_item | 
-[**getShoppingCart**](ShoppingCartApi.md#getShoppingCart) | **get** /shopping_cart/ | 
-[**removeItem**](ShoppingCartApi.md#removeItem) | **post** /shopping_cart/remove_item | 
-[**updateQuantity**](ShoppingCartApi.md#updateQuantity) | **post** /shopping_cart/update_quantity | 
+[**addItem**](ShoppingCartApi.md#addItem) | **POST** /shopping_cart/add_item | 
+[**getShoppingCart**](ShoppingCartApi.md#getShoppingCart) | **GET** /shopping_cart/ | 
+[**removeItem**](ShoppingCartApi.md#removeItem) | **POST** /shopping_cart/remove_item | 
+[**updateQuantity**](ShoppingCartApi.md#updateQuantity) | **POST** /shopping_cart/update_quantity | 
 
 
 # **addItem**
-> RemoteShopcartResponse addItem(addCartItemInput)
+> RemoteShopcartResponse addItem(body)
 
 
 
@@ -25,14 +25,14 @@ This is an Experimental method. This method creates an eBay cart for the eBay me
 ### Example 
 ```dart
 import 'package:ebay_buy_browse/api.dart';
-// TODO Configure OAuth2 access token for authorization: api_auth
-//defaultApiClient.getAuthentication<OAuth>('api_auth').accessToken = 'YOUR_ACCESS_TOKEN';
+// TODO Configure OAuth2 access token for authorization: Authorization Code
+//defaultApiClient.getAuthentication<OAuth>('Authorization Code').accessToken = 'YOUR_ACCESS_TOKEN';
 
-var api_instance = new ShoppingCartApi();
-var addCartItemInput = new AddCartItemInput(); // AddCartItemInput | 
+var api_instance = ShoppingCartApi();
+var body = AddCartItemInput(); // AddCartItemInput | 
 
 try { 
-    var result = api_instance.addItem(addCartItemInput);
+    var result = api_instance.addItem(body);
     print(result);
 } catch (e) {
     print("Exception when calling ShoppingCartApi->addItem: $e\n");
@@ -43,7 +43,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **addCartItemInput** | [**AddCartItemInput**](AddCartItemInput.md)|  | [optional] 
+ **body** | [**AddCartItemInput**](AddCartItemInput.md)|  | [optional] 
 
 ### Return type
 
@@ -51,12 +51,12 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[api_auth](../README.md#api_auth)
+[Authorization Code](../README.md#Authorization Code)
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+ - **Content-Type**: Not defined
+ - **Accept**: */*
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -70,10 +70,10 @@ This is an experimental method. This method retrieves all the items in the eBay 
 ### Example 
 ```dart
 import 'package:ebay_buy_browse/api.dart';
-// TODO Configure OAuth2 access token for authorization: api_auth
-//defaultApiClient.getAuthentication<OAuth>('api_auth').accessToken = 'YOUR_ACCESS_TOKEN';
+// TODO Configure OAuth2 access token for authorization: Authorization Code
+//defaultApiClient.getAuthentication<OAuth>('Authorization Code').accessToken = 'YOUR_ACCESS_TOKEN';
 
-var api_instance = new ShoppingCartApi();
+var api_instance = ShoppingCartApi();
 
 try { 
     var result = api_instance.getShoppingCart();
@@ -92,17 +92,17 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-[api_auth](../README.md#api_auth)
+[Authorization Code](../README.md#Authorization Code)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: application/json
+ - **Accept**: */*
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **removeItem**
-> RemoteShopcartResponse removeItem(removeCartItemInput)
+> RemoteShopcartResponse removeItem(body)
 
 
 
@@ -111,14 +111,14 @@ This is an experimental method. This method removes a specific item from the eBa
 ### Example 
 ```dart
 import 'package:ebay_buy_browse/api.dart';
-// TODO Configure OAuth2 access token for authorization: api_auth
-//defaultApiClient.getAuthentication<OAuth>('api_auth').accessToken = 'YOUR_ACCESS_TOKEN';
+// TODO Configure OAuth2 access token for authorization: Authorization Code
+//defaultApiClient.getAuthentication<OAuth>('Authorization Code').accessToken = 'YOUR_ACCESS_TOKEN';
 
-var api_instance = new ShoppingCartApi();
-var removeCartItemInput = new RemoveCartItemInput(); // RemoveCartItemInput | 
+var api_instance = ShoppingCartApi();
+var body = RemoveCartItemInput(); // RemoveCartItemInput | 
 
 try { 
-    var result = api_instance.removeItem(removeCartItemInput);
+    var result = api_instance.removeItem(body);
     print(result);
 } catch (e) {
     print("Exception when calling ShoppingCartApi->removeItem: $e\n");
@@ -129,7 +129,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **removeCartItemInput** | [**RemoveCartItemInput**](RemoveCartItemInput.md)|  | [optional] 
+ **body** | [**RemoveCartItemInput**](RemoveCartItemInput.md)|  | [optional] 
 
 ### Return type
 
@@ -137,17 +137,17 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[api_auth](../README.md#api_auth)
+[Authorization Code](../README.md#Authorization Code)
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+ - **Content-Type**: Not defined
+ - **Accept**: */*
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **updateQuantity**
-> RemoteShopcartResponse updateQuantity(updateCartItemInput)
+> RemoteShopcartResponse updateQuantity(body)
 
 
 
@@ -156,14 +156,14 @@ This is an experimental method. This method updates the quantity value of a spec
 ### Example 
 ```dart
 import 'package:ebay_buy_browse/api.dart';
-// TODO Configure OAuth2 access token for authorization: api_auth
-//defaultApiClient.getAuthentication<OAuth>('api_auth').accessToken = 'YOUR_ACCESS_TOKEN';
+// TODO Configure OAuth2 access token for authorization: Authorization Code
+//defaultApiClient.getAuthentication<OAuth>('Authorization Code').accessToken = 'YOUR_ACCESS_TOKEN';
 
-var api_instance = new ShoppingCartApi();
-var updateCartItemInput = new UpdateCartItemInput(); // UpdateCartItemInput | 
+var api_instance = ShoppingCartApi();
+var body = UpdateCartItemInput(); // UpdateCartItemInput | 
 
 try { 
-    var result = api_instance.updateQuantity(updateCartItemInput);
+    var result = api_instance.updateQuantity(body);
     print(result);
 } catch (e) {
     print("Exception when calling ShoppingCartApi->updateQuantity: $e\n");
@@ -174,7 +174,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **updateCartItemInput** | [**UpdateCartItemInput**](UpdateCartItemInput.md)|  | [optional] 
+ **body** | [**UpdateCartItemInput**](UpdateCartItemInput.md)|  | [optional] 
 
 ### Return type
 
@@ -182,12 +182,12 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[api_auth](../README.md#api_auth)
+[Authorization Code](../README.md#Authorization Code)
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+ - **Content-Type**: Not defined
+ - **Accept**: */*
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

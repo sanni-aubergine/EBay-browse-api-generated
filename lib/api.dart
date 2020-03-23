@@ -1,68 +1,79 @@
 library ebay_buy_browse.api;
 
-import 'package:dio/dio.dart';
-import 'package:built_value/serializer.dart';
-import 'package:ebay_buy_browse/serializers.dart';
-import 'package:ebay_buy_browse/api/item_api.dart';
-import 'package:ebay_buy_browse/api/item_summary_api.dart';
-import 'package:ebay_buy_browse/api/search_by_image_api.dart';
-import 'package:ebay_buy_browse/api/shopping_cart_api.dart';
+import 'dart:async';
+import 'dart:convert';
+import 'package:http/http.dart';
+
+part 'api_client.dart';
+part 'api_helper.dart';
+part 'api_exception.dart';
+part 'auth/authentication.dart';
+part 'auth/api_key_auth.dart';
+part 'auth/oauth.dart';
+part 'auth/http_basic_auth.dart';
+
+part 'api/item_api.dart';
+part 'api/item_summary_api.dart';
+part 'api/search_by_image_api.dart';
+part 'api/shopping_cart_api.dart';
+
+part 'model/add_cart_item_input.dart';
+part 'model/additional_product_identity.dart';
+part 'model/address.dart';
+part 'model/amount.dart';
+part 'model/aspect.dart';
+part 'model/aspect_distribution.dart';
+part 'model/aspect_group.dart';
+part 'model/aspect_value_distribution.dart';
+part 'model/attribute_name_value.dart';
+part 'model/buying_option_distribution.dart';
+part 'model/cart_item.dart';
+part 'model/category.dart';
+part 'model/category_distribution.dart';
+part 'model/common_descriptions.dart';
+part 'model/compatibility_payload.dart';
+part 'model/compatibility_property.dart';
+part 'model/compatibility_response.dart';
+part 'model/condition_distribution.dart';
+part 'model/converted_amount.dart';
+part 'model/error.dart';
+part 'model/error_parameter.dart';
+part 'model/estimated_availability.dart';
+part 'model/image.dart';
+part 'model/item.dart';
+part 'model/item_group_summary.dart';
+part 'model/item_location_impl.dart';
+part 'model/item_return_terms.dart';
+part 'model/item_summary.dart';
+part 'model/items.dart';
+part 'model/legal_address.dart';
+part 'model/marketing_price.dart';
+part 'model/pickup_option_summary.dart';
+part 'model/price.dart';
+part 'model/product.dart';
+part 'model/product_identity.dart';
+part 'model/rating_histogram.dart';
+part 'model/refinement.dart';
+part 'model/region.dart';
+part 'model/remote_shopcart_response.dart';
+part 'model/remove_cart_item_input.dart';
+part 'model/review_rating.dart';
+part 'model/search_by_image_request.dart';
+part 'model/search_paged_collection.dart';
+part 'model/seller.dart';
+part 'model/seller_detail.dart';
+part 'model/seller_legal_info.dart';
+part 'model/ship_to_location.dart';
+part 'model/ship_to_locations.dart';
+part 'model/shipping_option.dart';
+part 'model/shipping_option_summary.dart';
+part 'model/target_location.dart';
+part 'model/tax_jurisdiction.dart';
+part 'model/taxes.dart';
+part 'model/time_duration.dart';
+part 'model/typed_name_value.dart';
+part 'model/update_cart_item_input.dart';
+part 'model/vat_detail.dart';
 
 
-class EbayBuyBrowse {
-
-    Dio dio;
-    Serializers serializers;
-    String basePath = "https://api.ebay.com/buy/browse/v1";
-
-    EbayBuyBrowse({this.dio, Serializers serializers}) {
-    if (dio == null) {
-        BaseOptions options = new BaseOptions(
-            baseUrl: basePath,
-            connectTimeout: 5000,
-            receiveTimeout: 3000,
-        );
-        this.dio = new Dio(options);
-    }
-
-    this.serializers = serializers ?? standardSerializers;
-}
-
-
-    /**
-    * Get ItemApi instance, base route and serializer can be overridden by a given but be careful,
-    * by doing that all interceptors will not be executed
-    */
-    ItemApi getItemApi() {
-    return ItemApi(dio, serializers);
-    }
-
-
-    /**
-    * Get ItemSummaryApi instance, base route and serializer can be overridden by a given but be careful,
-    * by doing that all interceptors will not be executed
-    */
-    ItemSummaryApi getItemSummaryApi() {
-    return ItemSummaryApi(dio, serializers);
-    }
-
-
-    /**
-    * Get SearchByImageApi instance, base route and serializer can be overridden by a given but be careful,
-    * by doing that all interceptors will not be executed
-    */
-    SearchByImageApi getSearchByImageApi() {
-    return SearchByImageApi(dio, serializers);
-    }
-
-
-    /**
-    * Get ShoppingCartApi instance, base route and serializer can be overridden by a given but be careful,
-    * by doing that all interceptors will not be executed
-    */
-    ShoppingCartApi getShoppingCartApi() {
-    return ShoppingCartApi(dio, serializers);
-    }
-
-
-}
+ApiClient defaultApiClient = ApiClient();

@@ -1,41 +1,76 @@
-            import 'package:ebay_buy_browse/model/buying_option_distribution.dart';
-            import 'package:ebay_buy_browse/model/condition_distribution.dart';
-            import 'package:ebay_buy_browse/model/category_distribution.dart';
-            import 'package:built_collection/built_collection.dart';
-            import 'package:ebay_buy_browse/model/aspect_distribution.dart';
-        import 'package:built_value/built_value.dart';
-import 'package:built_value/serializer.dart';
+part of ebay_buy_browse.api;
 
-part 'refinement.g.dart';
+class Refinement {
+  /* An array of containers for the all the aspect refinements. */
+  List<AspectDistribution> aspectDistributions = [];
+  /* An array of containers for the all the buying option refinements. */
+  List<BuyingOptionDistribution> buyingOptionDistributions = [];
+  /* An array of containers for the all the category refinements. */
+  List<CategoryDistribution> categoryDistributions = [];
+  /* An array of containers for the all the condition refinements. */
+  List<ConditionDistribution> conditionDistributions = [];
+  /* The identifier of the category that most of the items are part of. */
+  String dominantCategoryId = null;
+  Refinement();
 
-abstract class Refinement implements Built<Refinement, RefinementBuilder> {
+  @override
+  String toString() {
+    return 'Refinement[aspectDistributions=$aspectDistributions, buyingOptionDistributions=$buyingOptionDistributions, categoryDistributions=$categoryDistributions, conditionDistributions=$conditionDistributions, dominantCategoryId=$dominantCategoryId, ]';
+  }
 
-    /* An array of containers for the all the aspect refinements. */
-        @nullable
-    @BuiltValueField(wireName: r'aspectDistributions')
-    BuiltList<AspectDistribution> get aspectDistributions;
-    /* An array of containers for the all the buying option refinements. */
-        @nullable
-    @BuiltValueField(wireName: r'buyingOptionDistributions')
-    BuiltList<BuyingOptionDistribution> get buyingOptionDistributions;
-    /* An array of containers for the all the category refinements. */
-        @nullable
-    @BuiltValueField(wireName: r'categoryDistributions')
-    BuiltList<CategoryDistribution> get categoryDistributions;
-    /* An array of containers for the all the condition refinements. */
-        @nullable
-    @BuiltValueField(wireName: r'conditionDistributions')
-    BuiltList<ConditionDistribution> get conditionDistributions;
-    /* The identifier of the category that most of the items are part of. */
-        @nullable
-    @BuiltValueField(wireName: r'dominantCategoryId')
-    String get dominantCategoryId;
+  Refinement.fromJson(Map<String, dynamic> json) {
+    if (json == null) return;
+    aspectDistributions = (json['aspectDistributions'] == null) ?
+      null :
+      AspectDistribution.listFromJson(json['aspectDistributions']);
+    buyingOptionDistributions = (json['buyingOptionDistributions'] == null) ?
+      null :
+      BuyingOptionDistribution.listFromJson(json['buyingOptionDistributions']);
+    categoryDistributions = (json['categoryDistributions'] == null) ?
+      null :
+      CategoryDistribution.listFromJson(json['categoryDistributions']);
+    conditionDistributions = (json['conditionDistributions'] == null) ?
+      null :
+      ConditionDistribution.listFromJson(json['conditionDistributions']);
+    dominantCategoryId = json['dominantCategoryId'];
+  }
 
-    // Boilerplate code needed to wire-up generated code
-    Refinement._();
+  Map<String, dynamic> toJson() {
+    Map <String, dynamic> json = {};
+    if (aspectDistributions != null)
+      json['aspectDistributions'] = aspectDistributions;
+    if (buyingOptionDistributions != null)
+      json['buyingOptionDistributions'] = buyingOptionDistributions;
+    if (categoryDistributions != null)
+      json['categoryDistributions'] = categoryDistributions;
+    if (conditionDistributions != null)
+      json['conditionDistributions'] = conditionDistributions;
+    if (dominantCategoryId != null)
+      json['dominantCategoryId'] = dominantCategoryId;
+    return json;
+  }
 
-    factory Refinement([updates(RefinementBuilder b)]) = _$Refinement;
-    static Serializer<Refinement> get serializer => _$refinementSerializer;
+  static List<Refinement> listFromJson(List<dynamic> json) {
+    return json == null ? List<Refinement>() : json.map((value) => Refinement.fromJson(value)).toList();
+  }
 
+  static Map<String, Refinement> mapFromJson(Map<String, dynamic> json) {
+    var map = Map<String, Refinement>();
+    if (json != null && json.isNotEmpty) {
+      json.forEach((String key, dynamic value) => map[key] = Refinement.fromJson(value));
+    }
+    return map;
+  }
+
+  // maps a json object with a list of Refinement-objects as value to a dart map
+  static Map<String, List<Refinement>> mapListFromJson(Map<String, dynamic> json) {
+    var map = Map<String, List<Refinement>>();
+     if (json != null && json.isNotEmpty) {
+       json.forEach((String key, dynamic value) {
+         map[key] = Refinement.listFromJson(value);
+       });
+     }
+     return map;
+  }
 }
 

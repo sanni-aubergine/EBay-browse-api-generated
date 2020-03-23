@@ -18,7 +18,7 @@ Name | Type | Description | Notes
 **registrationNumber** | **String** | The seller&#39;s registration number. This is information used by some countries. | [optional] [default to null]
 **sellerProvidedLegalAddress** | [**LegalAddress**](LegalAddress.md) |  | [optional] [default to null]
 **termsOfService** | **String** | This is a free-form string created by the seller. This is the seller&#39;s terms or condition, which is in addition to the seller&#39;s return policies. | [optional] [default to null]
-**vatDetails** | [**BuiltList&lt;VatDetail&gt;**](VatDetail.md) | An array of the seller&#39;s VAT (value added tax) IDs and the issuing country. VAT is a tax added by some European countries. | [optional] [default to const []]
+**vatDetails** | [**List&lt;VatDetail&gt;**](VatDetail.md) | An array of the seller&#39;s VAT (value added tax) IDs and the issuing country. VAT is a tax added by some European countries. | [optional] [default to []]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -1,33 +1,67 @@
-            import 'package:ebay_buy_browse/model/converted_amount.dart';
-        import 'package:built_value/built_value.dart';
-import 'package:built_value/serializer.dart';
+part of ebay_buy_browse.api;
 
-part 'marketing_price.g.dart';
+class MarketingPrice {
+  
+  ConvertedAmount discountAmount = null;
+  /* This field expresses the percentage of the seller discount based on the value in the originalPrice container. */
+  String discountPercentage = null;
+  
+  ConvertedAmount originalPrice = null;
+  /* Indicates the pricing treatment (discount) that was applied to the price of the item. Note: The pricing treatment affects the way and where the discounted price can be displayed. For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/browse/types/PriceTreatmentEnum.html'>eBay API documentation</a> */
+  String priceTreatment = null;
+  MarketingPrice();
 
-abstract class MarketingPrice implements Built<MarketingPrice, MarketingPriceBuilder> {
+  @override
+  String toString() {
+    return 'MarketingPrice[discountAmount=$discountAmount, discountPercentage=$discountPercentage, originalPrice=$originalPrice, priceTreatment=$priceTreatment, ]';
+  }
 
-    
-        @nullable
-    @BuiltValueField(wireName: r'discountAmount')
-    ConvertedAmount get discountAmount;
-    /* This field expresses the percentage of the seller discount based on the value in the originalPrice container. */
-        @nullable
-    @BuiltValueField(wireName: r'discountPercentage')
-    String get discountPercentage;
-    
-        @nullable
-    @BuiltValueField(wireName: r'originalPrice')
-    ConvertedAmount get originalPrice;
-    /* Indicates the pricing treatment (discount) that was applied to the price of the item. Note: The pricing treatment affects the way and where the discounted price can be displayed. For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/browse/types/PriceTreatmentEnum.html'>eBay API documentation</a> */
-        @nullable
-    @BuiltValueField(wireName: r'priceTreatment')
-    String get priceTreatment;
+  MarketingPrice.fromJson(Map<String, dynamic> json) {
+    if (json == null) return;
+    discountAmount = (json['discountAmount'] == null) ?
+      null :
+      ConvertedAmount.fromJson(json['discountAmount']);
+    discountPercentage = json['discountPercentage'];
+    originalPrice = (json['originalPrice'] == null) ?
+      null :
+      ConvertedAmount.fromJson(json['originalPrice']);
+    priceTreatment = json['priceTreatment'];
+  }
 
-    // Boilerplate code needed to wire-up generated code
-    MarketingPrice._();
+  Map<String, dynamic> toJson() {
+    Map <String, dynamic> json = {};
+    if (discountAmount != null)
+      json['discountAmount'] = discountAmount;
+    if (discountPercentage != null)
+      json['discountPercentage'] = discountPercentage;
+    if (originalPrice != null)
+      json['originalPrice'] = originalPrice;
+    if (priceTreatment != null)
+      json['priceTreatment'] = priceTreatment;
+    return json;
+  }
 
-    factory MarketingPrice([updates(MarketingPriceBuilder b)]) = _$MarketingPrice;
-    static Serializer<MarketingPrice> get serializer => _$marketingPriceSerializer;
+  static List<MarketingPrice> listFromJson(List<dynamic> json) {
+    return json == null ? List<MarketingPrice>() : json.map((value) => MarketingPrice.fromJson(value)).toList();
+  }
 
+  static Map<String, MarketingPrice> mapFromJson(Map<String, dynamic> json) {
+    var map = Map<String, MarketingPrice>();
+    if (json != null && json.isNotEmpty) {
+      json.forEach((String key, dynamic value) => map[key] = MarketingPrice.fromJson(value));
+    }
+    return map;
+  }
+
+  // maps a json object with a list of MarketingPrice-objects as value to a dart map
+  static Map<String, List<MarketingPrice>> mapListFromJson(Map<String, dynamic> json) {
+    var map = Map<String, List<MarketingPrice>>();
+     if (json != null && json.isNotEmpty) {
+       json.forEach((String key, dynamic value) {
+         map[key] = MarketingPrice.listFromJson(value);
+       });
+     }
+     return map;
+  }
 }
 

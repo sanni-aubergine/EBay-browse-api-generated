@@ -1,26 +1,57 @@
-            import 'package:ebay_buy_browse/model/region.dart';
-            import 'package:built_collection/built_collection.dart';
-        import 'package:built_value/built_value.dart';
-import 'package:built_value/serializer.dart';
+part of ebay_buy_browse.api;
 
-part 'ship_to_locations.g.dart';
+class ShipToLocations {
+  /* A array of containers for regions that are specifically excluded from a region set. You can use this to exclude a specific regionName from a regionType that you specifically include. */
+  List<Region> regionExcluded = [];
+  /* A array of containers for regions that are specifically included in a region set. You can use this to exclude a specific regionName from a regionType that you specifically include. */
+  List<Region> regionIncluded = [];
+  ShipToLocations();
 
-abstract class ShipToLocations implements Built<ShipToLocations, ShipToLocationsBuilder> {
+  @override
+  String toString() {
+    return 'ShipToLocations[regionExcluded=$regionExcluded, regionIncluded=$regionIncluded, ]';
+  }
 
-    /* A array of containers for regions that are specifically excluded from a region set. You can use this to exclude a specific regionName from a regionType that you specifically include. */
-        @nullable
-    @BuiltValueField(wireName: r'regionExcluded')
-    BuiltList<Region> get regionExcluded;
-    /* A array of containers for regions that are specifically included in a region set. You can use this to exclude a specific regionName from a regionType that you specifically include. */
-        @nullable
-    @BuiltValueField(wireName: r'regionIncluded')
-    BuiltList<Region> get regionIncluded;
+  ShipToLocations.fromJson(Map<String, dynamic> json) {
+    if (json == null) return;
+    regionExcluded = (json['regionExcluded'] == null) ?
+      null :
+      Region.listFromJson(json['regionExcluded']);
+    regionIncluded = (json['regionIncluded'] == null) ?
+      null :
+      Region.listFromJson(json['regionIncluded']);
+  }
 
-    // Boilerplate code needed to wire-up generated code
-    ShipToLocations._();
+  Map<String, dynamic> toJson() {
+    Map <String, dynamic> json = {};
+    if (regionExcluded != null)
+      json['regionExcluded'] = regionExcluded;
+    if (regionIncluded != null)
+      json['regionIncluded'] = regionIncluded;
+    return json;
+  }
 
-    factory ShipToLocations([updates(ShipToLocationsBuilder b)]) = _$ShipToLocations;
-    static Serializer<ShipToLocations> get serializer => _$shipToLocationsSerializer;
+  static List<ShipToLocations> listFromJson(List<dynamic> json) {
+    return json == null ? List<ShipToLocations>() : json.map((value) => ShipToLocations.fromJson(value)).toList();
+  }
 
+  static Map<String, ShipToLocations> mapFromJson(Map<String, dynamic> json) {
+    var map = Map<String, ShipToLocations>();
+    if (json != null && json.isNotEmpty) {
+      json.forEach((String key, dynamic value) => map[key] = ShipToLocations.fromJson(value));
+    }
+    return map;
+  }
+
+  // maps a json object with a list of ShipToLocations-objects as value to a dart map
+  static Map<String, List<ShipToLocations>> mapListFromJson(Map<String, dynamic> json) {
+    var map = Map<String, List<ShipToLocations>>();
+     if (json != null && json.isNotEmpty) {
+       json.forEach((String key, dynamic value) {
+         map[key] = ShipToLocations.listFromJson(value);
+       });
+     }
+     return map;
+  }
 }
 

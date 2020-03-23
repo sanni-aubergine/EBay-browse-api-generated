@@ -1,24 +1,53 @@
-        import 'package:built_value/built_value.dart';
-import 'package:built_value/serializer.dart';
+part of ebay_buy_browse.api;
 
-part 'update_cart_item_input.g.dart';
+class UpdateCartItemInput {
+  /* The identifier of the item in the cart to be updated. This ID is generated when the item was added to the cart. */
+  String cartItemId = null;
+  /* The new quantity for the item that is being updated. */
+  int quantity = null;
+  UpdateCartItemInput();
 
-abstract class UpdateCartItemInput implements Built<UpdateCartItemInput, UpdateCartItemInputBuilder> {
+  @override
+  String toString() {
+    return 'UpdateCartItemInput[cartItemId=$cartItemId, quantity=$quantity, ]';
+  }
 
-    /* The identifier of the item in the cart to be updated. This ID is generated when the item was added to the cart. */
-        @nullable
-    @BuiltValueField(wireName: r'cartItemId')
-    String get cartItemId;
-    /* The new quantity for the item that is being updated. */
-        @nullable
-    @BuiltValueField(wireName: r'quantity')
-    int get quantity;
+  UpdateCartItemInput.fromJson(Map<String, dynamic> json) {
+    if (json == null) return;
+    cartItemId = json['cartItemId'];
+    quantity = json['quantity'];
+  }
 
-    // Boilerplate code needed to wire-up generated code
-    UpdateCartItemInput._();
+  Map<String, dynamic> toJson() {
+    Map <String, dynamic> json = {};
+    if (cartItemId != null)
+      json['cartItemId'] = cartItemId;
+    if (quantity != null)
+      json['quantity'] = quantity;
+    return json;
+  }
 
-    factory UpdateCartItemInput([updates(UpdateCartItemInputBuilder b)]) = _$UpdateCartItemInput;
-    static Serializer<UpdateCartItemInput> get serializer => _$updateCartItemInputSerializer;
+  static List<UpdateCartItemInput> listFromJson(List<dynamic> json) {
+    return json == null ? List<UpdateCartItemInput>() : json.map((value) => UpdateCartItemInput.fromJson(value)).toList();
+  }
 
+  static Map<String, UpdateCartItemInput> mapFromJson(Map<String, dynamic> json) {
+    var map = Map<String, UpdateCartItemInput>();
+    if (json != null && json.isNotEmpty) {
+      json.forEach((String key, dynamic value) => map[key] = UpdateCartItemInput.fromJson(value));
+    }
+    return map;
+  }
+
+  // maps a json object with a list of UpdateCartItemInput-objects as value to a dart map
+  static Map<String, List<UpdateCartItemInput>> mapListFromJson(Map<String, dynamic> json) {
+    var map = Map<String, List<UpdateCartItemInput>>();
+     if (json != null && json.isNotEmpty) {
+       json.forEach((String key, dynamic value) {
+         map[key] = UpdateCartItemInput.listFromJson(value);
+       });
+     }
+     return map;
+  }
 }
 

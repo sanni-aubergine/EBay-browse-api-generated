@@ -1,20 +1,48 @@
-        import 'package:built_value/built_value.dart';
-import 'package:built_value/serializer.dart';
+part of ebay_buy_browse.api;
 
-part 'search_by_image_request.g.dart';
+class SearchByImageRequest {
+  /* The Base64 string of the image. */
+  String image = null;
+  SearchByImageRequest();
 
-abstract class SearchByImageRequest implements Built<SearchByImageRequest, SearchByImageRequestBuilder> {
+  @override
+  String toString() {
+    return 'SearchByImageRequest[image=$image, ]';
+  }
 
-    /* The Base64 string of the image. */
-        @nullable
-    @BuiltValueField(wireName: r'image')
-    String get image;
+  SearchByImageRequest.fromJson(Map<String, dynamic> json) {
+    if (json == null) return;
+    image = json['image'];
+  }
 
-    // Boilerplate code needed to wire-up generated code
-    SearchByImageRequest._();
+  Map<String, dynamic> toJson() {
+    Map <String, dynamic> json = {};
+    if (image != null)
+      json['image'] = image;
+    return json;
+  }
 
-    factory SearchByImageRequest([updates(SearchByImageRequestBuilder b)]) = _$SearchByImageRequest;
-    static Serializer<SearchByImageRequest> get serializer => _$searchByImageRequestSerializer;
+  static List<SearchByImageRequest> listFromJson(List<dynamic> json) {
+    return json == null ? List<SearchByImageRequest>() : json.map((value) => SearchByImageRequest.fromJson(value)).toList();
+  }
 
+  static Map<String, SearchByImageRequest> mapFromJson(Map<String, dynamic> json) {
+    var map = Map<String, SearchByImageRequest>();
+    if (json != null && json.isNotEmpty) {
+      json.forEach((String key, dynamic value) => map[key] = SearchByImageRequest.fromJson(value));
+    }
+    return map;
+  }
+
+  // maps a json object with a list of SearchByImageRequest-objects as value to a dart map
+  static Map<String, List<SearchByImageRequest>> mapListFromJson(Map<String, dynamic> json) {
+    var map = Map<String, List<SearchByImageRequest>>();
+     if (json != null && json.isNotEmpty) {
+       json.forEach((String key, dynamic value) {
+         map[key] = SearchByImageRequest.listFromJson(value);
+       });
+     }
+     return map;
+  }
 }
 

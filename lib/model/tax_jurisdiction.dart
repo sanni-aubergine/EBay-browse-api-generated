@@ -1,25 +1,55 @@
-            import 'package:ebay_buy_browse/model/region.dart';
-        import 'package:built_value/built_value.dart';
-import 'package:built_value/serializer.dart';
+part of ebay_buy_browse.api;
 
-part 'tax_jurisdiction.g.dart';
+class TaxJurisdiction {
+  
+  Region region = null;
+  /* The identifier of the tax jurisdiction. */
+  String taxJurisdictionId = null;
+  TaxJurisdiction();
 
-abstract class TaxJurisdiction implements Built<TaxJurisdiction, TaxJurisdictionBuilder> {
+  @override
+  String toString() {
+    return 'TaxJurisdiction[region=$region, taxJurisdictionId=$taxJurisdictionId, ]';
+  }
 
-    
-        @nullable
-    @BuiltValueField(wireName: r'region')
-    Region get region;
-    /* The identifier of the tax jurisdiction. */
-        @nullable
-    @BuiltValueField(wireName: r'taxJurisdictionId')
-    String get taxJurisdictionId;
+  TaxJurisdiction.fromJson(Map<String, dynamic> json) {
+    if (json == null) return;
+    region = (json['region'] == null) ?
+      null :
+      Region.fromJson(json['region']);
+    taxJurisdictionId = json['taxJurisdictionId'];
+  }
 
-    // Boilerplate code needed to wire-up generated code
-    TaxJurisdiction._();
+  Map<String, dynamic> toJson() {
+    Map <String, dynamic> json = {};
+    if (region != null)
+      json['region'] = region;
+    if (taxJurisdictionId != null)
+      json['taxJurisdictionId'] = taxJurisdictionId;
+    return json;
+  }
 
-    factory TaxJurisdiction([updates(TaxJurisdictionBuilder b)]) = _$TaxJurisdiction;
-    static Serializer<TaxJurisdiction> get serializer => _$taxJurisdictionSerializer;
+  static List<TaxJurisdiction> listFromJson(List<dynamic> json) {
+    return json == null ? List<TaxJurisdiction>() : json.map((value) => TaxJurisdiction.fromJson(value)).toList();
+  }
 
+  static Map<String, TaxJurisdiction> mapFromJson(Map<String, dynamic> json) {
+    var map = Map<String, TaxJurisdiction>();
+    if (json != null && json.isNotEmpty) {
+      json.forEach((String key, dynamic value) => map[key] = TaxJurisdiction.fromJson(value));
+    }
+    return map;
+  }
+
+  // maps a json object with a list of TaxJurisdiction-objects as value to a dart map
+  static Map<String, List<TaxJurisdiction>> mapListFromJson(Map<String, dynamic> json) {
+    var map = Map<String, List<TaxJurisdiction>>();
+     if (json != null && json.isNotEmpty) {
+       json.forEach((String key, dynamic value) {
+         map[key] = TaxJurisdiction.listFromJson(value);
+       });
+     }
+     return map;
+  }
 }
 

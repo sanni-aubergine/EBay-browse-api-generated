@@ -1,26 +1,55 @@
-            import 'package:ebay_buy_browse/model/aspect_value_distribution.dart';
-            import 'package:built_collection/built_collection.dart';
-        import 'package:built_value/built_value.dart';
-import 'package:built_value/serializer.dart';
+part of ebay_buy_browse.api;
 
-part 'aspect_distribution.g.dart';
+class AspectDistribution {
+  /* An array of containers for the various values of the aspect and the match count and a HATEOAS reference ( refinementHref) for this aspect. */
+  List<AspectValueDistribution> aspectValueDistributions = [];
+  /* The name of an aspect, such as Brand, Color, etc. */
+  String localizedAspectName = null;
+  AspectDistribution();
 
-abstract class AspectDistribution implements Built<AspectDistribution, AspectDistributionBuilder> {
+  @override
+  String toString() {
+    return 'AspectDistribution[aspectValueDistributions=$aspectValueDistributions, localizedAspectName=$localizedAspectName, ]';
+  }
 
-    /* An array of containers for the various values of the aspect and the match count and a HATEOAS reference ( refinementHref) for this aspect. */
-        @nullable
-    @BuiltValueField(wireName: r'aspectValueDistributions')
-    BuiltList<AspectValueDistribution> get aspectValueDistributions;
-    /* The name of an aspect, such as Brand, Color, etc. */
-        @nullable
-    @BuiltValueField(wireName: r'localizedAspectName')
-    String get localizedAspectName;
+  AspectDistribution.fromJson(Map<String, dynamic> json) {
+    if (json == null) return;
+    aspectValueDistributions = (json['aspectValueDistributions'] == null) ?
+      null :
+      AspectValueDistribution.listFromJson(json['aspectValueDistributions']);
+    localizedAspectName = json['localizedAspectName'];
+  }
 
-    // Boilerplate code needed to wire-up generated code
-    AspectDistribution._();
+  Map<String, dynamic> toJson() {
+    Map <String, dynamic> json = {};
+    if (aspectValueDistributions != null)
+      json['aspectValueDistributions'] = aspectValueDistributions;
+    if (localizedAspectName != null)
+      json['localizedAspectName'] = localizedAspectName;
+    return json;
+  }
 
-    factory AspectDistribution([updates(AspectDistributionBuilder b)]) = _$AspectDistribution;
-    static Serializer<AspectDistribution> get serializer => _$aspectDistributionSerializer;
+  static List<AspectDistribution> listFromJson(List<dynamic> json) {
+    return json == null ? List<AspectDistribution>() : json.map((value) => AspectDistribution.fromJson(value)).toList();
+  }
 
+  static Map<String, AspectDistribution> mapFromJson(Map<String, dynamic> json) {
+    var map = Map<String, AspectDistribution>();
+    if (json != null && json.isNotEmpty) {
+      json.forEach((String key, dynamic value) => map[key] = AspectDistribution.fromJson(value));
+    }
+    return map;
+  }
+
+  // maps a json object with a list of AspectDistribution-objects as value to a dart map
+  static Map<String, List<AspectDistribution>> mapListFromJson(Map<String, dynamic> json) {
+    var map = Map<String, List<AspectDistribution>>();
+     if (json != null && json.isNotEmpty) {
+       json.forEach((String key, dynamic value) {
+         map[key] = AspectDistribution.listFromJson(value);
+       });
+     }
+     return map;
+  }
 }
 

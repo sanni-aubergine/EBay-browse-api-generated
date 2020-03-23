@@ -1,28 +1,58 @@
-        import 'package:built_value/built_value.dart';
-import 'package:built_value/serializer.dart';
+part of ebay_buy_browse.api;
 
-part 'image.g.dart';
+class Image {
+  /* Reserved for future use. */
+  int height = null;
+  /* The URL of the image. */
+  String imageUrl = null;
+  /* Reserved for future use. */
+  int width = null;
+  Image();
 
-abstract class Image implements Built<Image, ImageBuilder> {
+  @override
+  String toString() {
+    return 'Image[height=$height, imageUrl=$imageUrl, width=$width, ]';
+  }
 
-    /* Reserved for future use. */
-        @nullable
-    @BuiltValueField(wireName: r'height')
-    int get height;
-    /* The URL of the image. */
-        @nullable
-    @BuiltValueField(wireName: r'imageUrl')
-    String get imageUrl;
-    /* Reserved for future use. */
-        @nullable
-    @BuiltValueField(wireName: r'width')
-    int get width;
+  Image.fromJson(Map<String, dynamic> json) {
+    if (json == null) return;
+    height = json['height'];
+    imageUrl = json['imageUrl'];
+    width = json['width'];
+  }
 
-    // Boilerplate code needed to wire-up generated code
-    Image._();
+  Map<String, dynamic> toJson() {
+    Map <String, dynamic> json = {};
+    if (height != null)
+      json['height'] = height;
+    if (imageUrl != null)
+      json['imageUrl'] = imageUrl;
+    if (width != null)
+      json['width'] = width;
+    return json;
+  }
 
-    factory Image([updates(ImageBuilder b)]) = _$Image;
-    static Serializer<Image> get serializer => _$imageSerializer;
+  static List<Image> listFromJson(List<dynamic> json) {
+    return json == null ? List<Image>() : json.map((value) => Image.fromJson(value)).toList();
+  }
 
+  static Map<String, Image> mapFromJson(Map<String, dynamic> json) {
+    var map = Map<String, Image>();
+    if (json != null && json.isNotEmpty) {
+      json.forEach((String key, dynamic value) => map[key] = Image.fromJson(value));
+    }
+    return map;
+  }
+
+  // maps a json object with a list of Image-objects as value to a dart map
+  static Map<String, List<Image>> mapListFromJson(Map<String, dynamic> json) {
+    var map = Map<String, List<Image>>();
+     if (json != null && json.isNotEmpty) {
+       json.forEach((String key, dynamic value) {
+         map[key] = Image.listFromJson(value);
+       });
+     }
+     return map;
+  }
 }
 

@@ -1,63 +1,102 @@
-            import 'package:ebay_buy_browse/model/vat_detail.dart';
-            import 'package:built_collection/built_collection.dart';
-            import 'package:ebay_buy_browse/model/legal_address.dart';
-        import 'package:built_value/built_value.dart';
-import 'package:built_value/serializer.dart';
+part of ebay_buy_browse.api;
 
-part 'seller_legal_info.g.dart';
+class SellerLegalInfo {
+  /* The seller's business email address. */
+  String email = null;
+  /* The seller' business fax number. */
+  String fax = null;
+  /* This is a free-form string created by the seller. This is information often found on business cards, such as address. This is information used by some countries. */
+  String imprint = null;
+  /* The seller's first name. */
+  String legalContactFirstName = null;
+  /* The seller's last name. */
+  String legalContactLastName = null;
+  /* The name of the seller's business. */
+  String name = null;
+  /* The seller's business phone number. */
+  String phone = null;
+  /* The seller's registration number. This is information used by some countries. */
+  String registrationNumber = null;
+  
+  LegalAddress sellerProvidedLegalAddress = null;
+  /* This is a free-form string created by the seller. This is the seller's terms or condition, which is in addition to the seller's return policies. */
+  String termsOfService = null;
+  /* An array of the seller's VAT (value added tax) IDs and the issuing country. VAT is a tax added by some European countries. */
+  List<VatDetail> vatDetails = [];
+  SellerLegalInfo();
 
-abstract class SellerLegalInfo implements Built<SellerLegalInfo, SellerLegalInfoBuilder> {
+  @override
+  String toString() {
+    return 'SellerLegalInfo[email=$email, fax=$fax, imprint=$imprint, legalContactFirstName=$legalContactFirstName, legalContactLastName=$legalContactLastName, name=$name, phone=$phone, registrationNumber=$registrationNumber, sellerProvidedLegalAddress=$sellerProvidedLegalAddress, termsOfService=$termsOfService, vatDetails=$vatDetails, ]';
+  }
 
-    /* The seller's business email address. */
-        @nullable
-    @BuiltValueField(wireName: r'email')
-    String get email;
-    /* The seller' business fax number. */
-        @nullable
-    @BuiltValueField(wireName: r'fax')
-    String get fax;
-    /* This is a free-form string created by the seller. This is information often found on business cards, such as address. This is information used by some countries. */
-        @nullable
-    @BuiltValueField(wireName: r'imprint')
-    String get imprint;
-    /* The seller's first name. */
-        @nullable
-    @BuiltValueField(wireName: r'legalContactFirstName')
-    String get legalContactFirstName;
-    /* The seller's last name. */
-        @nullable
-    @BuiltValueField(wireName: r'legalContactLastName')
-    String get legalContactLastName;
-    /* The name of the seller's business. */
-        @nullable
-    @BuiltValueField(wireName: r'name')
-    String get name;
-    /* The seller's business phone number. */
-        @nullable
-    @BuiltValueField(wireName: r'phone')
-    String get phone;
-    /* The seller's registration number. This is information used by some countries. */
-        @nullable
-    @BuiltValueField(wireName: r'registrationNumber')
-    String get registrationNumber;
-    
-        @nullable
-    @BuiltValueField(wireName: r'sellerProvidedLegalAddress')
-    LegalAddress get sellerProvidedLegalAddress;
-    /* This is a free-form string created by the seller. This is the seller's terms or condition, which is in addition to the seller's return policies. */
-        @nullable
-    @BuiltValueField(wireName: r'termsOfService')
-    String get termsOfService;
-    /* An array of the seller's VAT (value added tax) IDs and the issuing country. VAT is a tax added by some European countries. */
-        @nullable
-    @BuiltValueField(wireName: r'vatDetails')
-    BuiltList<VatDetail> get vatDetails;
+  SellerLegalInfo.fromJson(Map<String, dynamic> json) {
+    if (json == null) return;
+    email = json['email'];
+    fax = json['fax'];
+    imprint = json['imprint'];
+    legalContactFirstName = json['legalContactFirstName'];
+    legalContactLastName = json['legalContactLastName'];
+    name = json['name'];
+    phone = json['phone'];
+    registrationNumber = json['registrationNumber'];
+    sellerProvidedLegalAddress = (json['sellerProvidedLegalAddress'] == null) ?
+      null :
+      LegalAddress.fromJson(json['sellerProvidedLegalAddress']);
+    termsOfService = json['termsOfService'];
+    vatDetails = (json['vatDetails'] == null) ?
+      null :
+      VatDetail.listFromJson(json['vatDetails']);
+  }
 
-    // Boilerplate code needed to wire-up generated code
-    SellerLegalInfo._();
+  Map<String, dynamic> toJson() {
+    Map <String, dynamic> json = {};
+    if (email != null)
+      json['email'] = email;
+    if (fax != null)
+      json['fax'] = fax;
+    if (imprint != null)
+      json['imprint'] = imprint;
+    if (legalContactFirstName != null)
+      json['legalContactFirstName'] = legalContactFirstName;
+    if (legalContactLastName != null)
+      json['legalContactLastName'] = legalContactLastName;
+    if (name != null)
+      json['name'] = name;
+    if (phone != null)
+      json['phone'] = phone;
+    if (registrationNumber != null)
+      json['registrationNumber'] = registrationNumber;
+    if (sellerProvidedLegalAddress != null)
+      json['sellerProvidedLegalAddress'] = sellerProvidedLegalAddress;
+    if (termsOfService != null)
+      json['termsOfService'] = termsOfService;
+    if (vatDetails != null)
+      json['vatDetails'] = vatDetails;
+    return json;
+  }
 
-    factory SellerLegalInfo([updates(SellerLegalInfoBuilder b)]) = _$SellerLegalInfo;
-    static Serializer<SellerLegalInfo> get serializer => _$sellerLegalInfoSerializer;
+  static List<SellerLegalInfo> listFromJson(List<dynamic> json) {
+    return json == null ? List<SellerLegalInfo>() : json.map((value) => SellerLegalInfo.fromJson(value)).toList();
+  }
 
+  static Map<String, SellerLegalInfo> mapFromJson(Map<String, dynamic> json) {
+    var map = Map<String, SellerLegalInfo>();
+    if (json != null && json.isNotEmpty) {
+      json.forEach((String key, dynamic value) => map[key] = SellerLegalInfo.fromJson(value));
+    }
+    return map;
+  }
+
+  // maps a json object with a list of SellerLegalInfo-objects as value to a dart map
+  static Map<String, List<SellerLegalInfo>> mapListFromJson(Map<String, dynamic> json) {
+    var map = Map<String, List<SellerLegalInfo>>();
+     if (json != null && json.isNotEmpty) {
+       json.forEach((String key, dynamic value) {
+         map[key] = SellerLegalInfo.listFromJson(value);
+       });
+     }
+     return map;
+  }
 }
 

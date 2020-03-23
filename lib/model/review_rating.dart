@@ -1,30 +1,60 @@
-            import 'package:ebay_buy_browse/model/rating_histogram.dart';
-            import 'package:built_collection/built_collection.dart';
-        import 'package:built_value/built_value.dart';
-import 'package:built_value/serializer.dart';
+part of ebay_buy_browse.api;
 
-part 'review_rating.g.dart';
+class ReviewRating {
+  /* The average rating given to a product based on customer reviews. */
+  String averageRating = null;
+  /* An array of containers for the product rating histograms that shows the review counts and the product rating. */
+  List<RatingHistogram> ratingHistograms = [];
+  /* The total number of reviews for the item. */
+  int reviewCount = null;
+  ReviewRating();
 
-abstract class ReviewRating implements Built<ReviewRating, ReviewRatingBuilder> {
+  @override
+  String toString() {
+    return 'ReviewRating[averageRating=$averageRating, ratingHistograms=$ratingHistograms, reviewCount=$reviewCount, ]';
+  }
 
-    /* The average rating given to a product based on customer reviews. */
-        @nullable
-    @BuiltValueField(wireName: r'averageRating')
-    String get averageRating;
-    /* An array of containers for the product rating histograms that shows the review counts and the product rating. */
-        @nullable
-    @BuiltValueField(wireName: r'ratingHistograms')
-    BuiltList<RatingHistogram> get ratingHistograms;
-    /* The total number of reviews for the item. */
-        @nullable
-    @BuiltValueField(wireName: r'reviewCount')
-    int get reviewCount;
+  ReviewRating.fromJson(Map<String, dynamic> json) {
+    if (json == null) return;
+    averageRating = json['averageRating'];
+    ratingHistograms = (json['ratingHistograms'] == null) ?
+      null :
+      RatingHistogram.listFromJson(json['ratingHistograms']);
+    reviewCount = json['reviewCount'];
+  }
 
-    // Boilerplate code needed to wire-up generated code
-    ReviewRating._();
+  Map<String, dynamic> toJson() {
+    Map <String, dynamic> json = {};
+    if (averageRating != null)
+      json['averageRating'] = averageRating;
+    if (ratingHistograms != null)
+      json['ratingHistograms'] = ratingHistograms;
+    if (reviewCount != null)
+      json['reviewCount'] = reviewCount;
+    return json;
+  }
 
-    factory ReviewRating([updates(ReviewRatingBuilder b)]) = _$ReviewRating;
-    static Serializer<ReviewRating> get serializer => _$reviewRatingSerializer;
+  static List<ReviewRating> listFromJson(List<dynamic> json) {
+    return json == null ? List<ReviewRating>() : json.map((value) => ReviewRating.fromJson(value)).toList();
+  }
 
+  static Map<String, ReviewRating> mapFromJson(Map<String, dynamic> json) {
+    var map = Map<String, ReviewRating>();
+    if (json != null && json.isNotEmpty) {
+      json.forEach((String key, dynamic value) => map[key] = ReviewRating.fromJson(value));
+    }
+    return map;
+  }
+
+  // maps a json object with a list of ReviewRating-objects as value to a dart map
+  static Map<String, List<ReviewRating>> mapListFromJson(Map<String, dynamic> json) {
+    var map = Map<String, List<ReviewRating>>();
+     if (json != null && json.isNotEmpty) {
+       json.forEach((String key, dynamic value) {
+         map[key] = ReviewRating.listFromJson(value);
+       });
+     }
+     return map;
+  }
 }
 

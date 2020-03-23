@@ -1,27 +1,57 @@
-            import 'package:ebay_buy_browse/model/item.dart';
-            import 'package:built_collection/built_collection.dart';
-            import 'package:ebay_buy_browse/model/common_descriptions.dart';
-        import 'package:built_value/built_value.dart';
-import 'package:built_value/serializer.dart';
+part of ebay_buy_browse.api;
 
-part 'items.g.dart';
+class Items {
+  /* An array of containers for a description and the item IDs of all the items that have this exact description. Often the item variations within an item group all have the same description. Instead of repeating this description in the item details of each item, an description that is shared by at one other item is returned in this container. If the description is unique, it is returned in the items.description field. */
+  List<CommonDescriptions> commonDescriptions = [];
+  /* An array of containers for all the item variations details, excluding the description. */
+  List<Item> items = [];
+  Items();
 
-abstract class Items implements Built<Items, ItemsBuilder> {
+  @override
+  String toString() {
+    return 'Items[commonDescriptions=$commonDescriptions, items=$items, ]';
+  }
 
-    /* An array of containers for a description and the item IDs of all the items that have this exact description. Often the item variations within an item group all have the same description. Instead of repeating this description in the item details of each item, an description that is shared by at one other item is returned in this container. If the description is unique, it is returned in the items.description field. */
-        @nullable
-    @BuiltValueField(wireName: r'commonDescriptions')
-    BuiltList<CommonDescriptions> get commonDescriptions;
-    /* An array of containers for all the item variations details, excluding the description. */
-        @nullable
-    @BuiltValueField(wireName: r'items')
-    BuiltList<Item> get items;
+  Items.fromJson(Map<String, dynamic> json) {
+    if (json == null) return;
+    commonDescriptions = (json['commonDescriptions'] == null) ?
+      null :
+      CommonDescriptions.listFromJson(json['commonDescriptions']);
+    items = (json['items'] == null) ?
+      null :
+      Item.listFromJson(json['items']);
+  }
 
-    // Boilerplate code needed to wire-up generated code
-    Items._();
+  Map<String, dynamic> toJson() {
+    Map <String, dynamic> json = {};
+    if (commonDescriptions != null)
+      json['commonDescriptions'] = commonDescriptions;
+    if (items != null)
+      json['items'] = items;
+    return json;
+  }
 
-    factory Items([updates(ItemsBuilder b)]) = _$Items;
-    static Serializer<Items> get serializer => _$itemsSerializer;
+  static List<Items> listFromJson(List<dynamic> json) {
+    return json == null ? List<Items>() : json.map((value) => Items.fromJson(value)).toList();
+  }
 
+  static Map<String, Items> mapFromJson(Map<String, dynamic> json) {
+    var map = Map<String, Items>();
+    if (json != null && json.isNotEmpty) {
+      json.forEach((String key, dynamic value) => map[key] = Items.fromJson(value));
+    }
+    return map;
+  }
+
+  // maps a json object with a list of Items-objects as value to a dart map
+  static Map<String, List<Items>> mapListFromJson(Map<String, dynamic> json) {
+    var map = Map<String, List<Items>>();
+     if (json != null && json.isNotEmpty) {
+       json.forEach((String key, dynamic value) {
+         map[key] = Items.listFromJson(value);
+       });
+     }
+     return map;
+  }
 }
 
