@@ -20,7 +20,7 @@ version: 0.0.1
 description: Ebay&#39;s buy browse api
 dependencies:
   ebay_buy_browse:
-    git: https://github.com/GIT_USER_ID/GIT_REPO_ID.git
+    git: https://github.com/sanni-aubergine/EBay-browse-api-generated.git
       version: 'any'
 ```
 
