@@ -4,7 +4,7 @@ description: Ebay&#39;s buy browse api
 environment:
     sdk: ">=2.3.0 <3.0.0"
 dependencies:
-    dio: ^3.0.9
+    dio: ^3.0.4
     built_value: ^7.0.9
     built_collection: ^4.3.2
 dev_dependencies:
