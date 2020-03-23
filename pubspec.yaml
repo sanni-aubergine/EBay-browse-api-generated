@@ -1,5 +1,5 @@
 name: ebay_buy_browse
-version: 0.0.1
+version: 0.0.2
 description: Ebay&#39;s buy browse api
 environment:
     sdk: ">=2.3.0 <3.0.0"
